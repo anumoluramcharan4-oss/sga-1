@@ -1,0 +1,18 @@
+Q1: Linux Environment Verification
+
+Commands performed:
+1. whoami
+   Output: codespace
+2. id
+   Output showed uid=1000(codespace), gid=1000(codespace), and the supplementary groups: pipx, python, oryx, golang, docker, sdkman, rvm, php, conda, nvs, nvm, hugo, and ssh.
+3. echo "$SHELL"
+   Output: /bin/bash
+4. pwd
+   Output: /
+5. ls -ls
+   Output listed the directories and files at the root of the filesystem, including /workspaces.
+6. curl -s --max-time 10 https://google.com > /dev/null && echo "Network: google.com reachable"
+   Output: Network: google.com reachable
+
+Observations:
+The active user account is codespace and the shell is Bash. The current working directory in the captured session was the filesystem root (/). The workspace and system directories were visible in the directory listing, and the network test confirmed external connectivity to google.com.

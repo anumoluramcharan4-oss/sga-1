@@ -1,0 +1,35 @@
+Q2: Secure Project Workspace Setup
+
+Directory structure created:
+- secure_workspace/
+- secure_workspace/docs/
+- secure_workspace/src/
+- secure_workspace/logs/
+
+Files created:
+- secure_workspace/docs/plan.txt
+- secure_workspace/src/app.txt
+- secure_workspace/logs/activity.log
+
+Permissions before modification:
+- secure_workspace and its subdirectories initially showed 777-style permissions in the captured output.
+- The files were created before tightening permissions and then normalized to the secure 640 mode.
+
+Permissions after modification:
+- secure_workspace: 750
+- secure_workspace/docs: 750
+- secure_workspace/src: 750
+- secure_workspace/logs: 750
+- plan.txt: 640
+- app.txt: 640
+- activity.log: 640
+
+Ownership details:
+- Owner: codespace
+- Group: codespace
+
+Umask value used:
+- 0022
+
+Explanation:
+The directory permissions allow the owner to read, write, and enter the workspace while blocking access for other users. The files are readable by the owner and group but not writable by others, which protects project documents and logs from accidental or unauthorized edits. A umask of 0022 helps ensure new files do not become world-writable by default, and the corrected chmod command sets the final 750/640 layout.

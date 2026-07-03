@@ -1,0 +1,45 @@
+Q5: Storage Health Assessment
+
+Commands performed:
+1. lsblk
+2. mount | head -5
+3. df -h
+4. df -i
+
+Available storage devices:
+- loop devices: loop0, loop1, loop2, loop3, loop4, loop5
+- disks: sda, sdb, sdc
+- optical device: sr0
+
+Mounted file systems:
+- overlay on /
+- proc on /proc
+- tmpfs on /dev and /dev/shm
+- devpts on /dev/pts
+- sysfs on /sys
+
+Disk usage statistics:
+- overlay: 32G total, 9.6G used, 21G available, 33% used
+- /vscode: 29G total, 24G used, 5.6G available, 81% used
+- /tmp: 44G total, 2.8G used, 40G available, 7% used
+- /workspaces: 32G total, 9.6G used, 21G available, 33% used
+
+Inode utilization:
+- overlay: 10% used
+- /vscode: 7% used
+- /tmp: 1% used
+- /workspaces: 10% used
+
+Storage health observations:
+- Most filesystems have healthy free space and low inode usage.
+- /vscode is the busiest mounted filesystem and should be monitored more closely than the others.
+
+Recommendations:
+- Remove unused files and caches from /vscode if growth continues.
+- Continue periodic checks with df -h and df -i to watch both capacity and inode pressure.
+- Keep large application data in the workspace or tmp storage only if the lifetime of the data is clearly understood.
+
+
+
+
+

@@ -1,0 +1,27 @@
+Q3: File System and Link Analysis
+
+Commands performed:
+1. echo "Linux link test file" > original.txt
+2. ln original.txt hardlink.txt
+3. ln -s original.txt symlink.txt
+4. ls -li
+5. stat original.txt hardlink.txt symlink.txt
+6. cat original.txt
+7. cat hardlink.txt
+8. cat symlink.txt
+9. rm original.txt
+10. ls -li
+11. cat hardlink.txt
+12. cat symlink.txt
+
+Inode numbers and metadata:
+- original.txt and hardlink.txt shared inode 1310805.
+- symlink.txt had inode 1310806 and pointed to original.txt.
+- The hard link count for the original file was 2 before deletion, then 1 after original.txt was removed.
+
+Behavior observed:
+- The hard link remained readable after original.txt was deleted because it still referenced the same inode and data blocks.
+- The symbolic link became broken after original.txt was removed because it only stores the path to the deleted file.
+
+Conclusion:
+Hard links keep file data alive until the last link is removed, while symbolic links depend on the target path existing. The stat and ls -li outputs clearly show the difference in inode usage and link counts.

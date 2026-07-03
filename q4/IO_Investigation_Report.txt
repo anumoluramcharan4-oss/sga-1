@@ -1,0 +1,29 @@
+Q4: File Access and I/O Investigation
+
+Commands performed:
+1. echo "sample log line" > app.log
+2. lsof | head -n 20
+3. exec 3<app.log
+4. lsof -p $$
+5. ls -l /proc/$$/fd | grep app.log
+6. ls -l /proc/$$/fd
+7. ls -l > stdout.txt
+8. ls /not_a_real_path 2> stderr.txt
+9. (ls -l && ls /not_a_real_path) > combined.txt 2>&1
+10. ulimit -a
+11. exec 3<&-
+
+Open files and file descriptors:
+- FD 3 was opened on app.log using input redirection with exec 3<app.log.
+- /proc/$$/fd showed descriptor 3 pointing to app.log, which confirmed the shell had the file open.
+
+Redirection results:
+- stdout.txt captured normal command output.
+- stderr.txt captured the error message for the invalid path.
+- combined.txt captured both standard output and standard error in one file.
+
+Resource limits observed:
+- open files: 524288
+
+Conclusion:
+Linux treats files as streams attached to numeric descriptors, and redirection controls where each stream goes. The lsof and /proc views confirmed the open descriptor, while the redirection tests showed how standard output and error can be separated or merged.
